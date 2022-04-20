@@ -1,3 +1,4 @@
+from sqlalchemy import orm
 import datetime
 import sqlalchemy
 from sqlalchemy_serializer import SerializerMixin
@@ -13,3 +14,4 @@ class User(SqlAlchemyBase, SerializerMixin, UserMixin):
     fingerprint = sqlalchemy.Column(sqlalchemy.String)
     mnemo = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     secured_code = sqlalchemy.Column(sqlalchemy.String)
+    tokens = orm.relation('UsersToken', back_populates='user')

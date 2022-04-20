@@ -31,7 +31,8 @@ def login_page():
                                                         'secured_code')).first()
             if user:
                 mnemo = mnemonic.Mnemonic('english')
-                if mnemo.check(cryptocode.decrypt(user.mnemo, user.fingerprint + form.password.data)):
+                print(cryptocode.decrypt(user.mnemo, user.fingerprint + form.password.data))
+                if mnemo.check(str(cryptocode.decrypt(user.mnemo, user.fingerprint + form.password.data))):
                     secured_code = utils.generate_secure_code()
                     login_user(user, duration=datetime.timedelta(minutes=30))
                     user.secured_code = secured_code
@@ -39,6 +40,8 @@ def login_page():
                     resp.set_cookie('secured_code', secured_code, max_age=datetime.timedelta(days=90))
                     session.commit()
                     return resp
+                flask.flash('Incorrect password')
+                return flask.redirect('/login')
             else:
                 flask.flash('User is not found')
                 resp = flask.make_response(flask.redirect('/registration/'))

@@ -3,8 +3,9 @@ import flask_login
 from db_utils import db_session
 from blueprints.authorization import authorization
 from blueprints.home import home
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, make_response
 import bfa
+from blueprints.home import home_api
 from db_models.users import User
 from flask_restful import Api
 from flask_login import LoginManager, login_required, logout_user, current_user
@@ -43,12 +44,16 @@ def load_user(user_id):
 @login_required
 def logout():
     logout_user()
-    return redirect("/")
+    resp = make_response(redirect("/"))
+    resp.delete_cookie('secured_code')
+    resp.delete_cookie('session')
+    return resp
 
 
 if __name__ == '__main__':
     db_session.global_init("db/database.db")
     app.register_blueprint(authorization.blueprint)
     app.register_blueprint(home.blueprint)
-    # api.add_resource(user_resource.UsersListResource, '/api/users')
+    api.add_resource(home_api.TokensListResource, '/api/tokens')
+    api.add_resource(home_api.UserTokenListResource, '/api/users/tokens')
     app.run(port=os.getenv('PORT', 8080), host='0.0.0.0')
