@@ -1,29 +1,25 @@
 {% extends "base.html" %}
-
+{% block head %}
+    <link rel="stylesheet" href="/static/css/login.css">
+{% endblock %}
 {% block content %}
-<h1>Авторизация</h1>
-<form action="" method="post">
-    {{ form.hidden_tag() }}
-    {{ fingerprint_input }}
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul class=flashes>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-    <p>
-        {{ form.password.label }}<br>
-        {{ form.password(class="form-control", type="password") }}<br>
-        {% for error in form.password.errors %}
-    <div class="alert alert-danger" role="alert">
-        {{ error }}
+    <div class="main-window">
+        <h2>Log in</h2>
+        <form id="login-form">
+            <div class="row">
+                <div class="col-2 form-text">Password</div>
+                <div class="col-8">
+                    <input id="password" class="password" placeholder="Enter password for wallet">
+                </div>
+            </div>
+            <div class="errors">
+
+            </div>
+            <div class="row">
+                <input type="submit" id="submit__button" value="SEND">
+            </div>
+
+        </form>
     </div>
-    {% endfor %}
-    </p>
-    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
-    <div>{{ message }}</div>
-</form>
+    <script src="/static/js/login.js"></script>
 {% endblock %}

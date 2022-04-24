@@ -1,0 +1,67 @@
+body {
+    overflow-y: hidden;
+}
+
+.refresh-icon {
+    transition: transform 1s ease;
+}
+.main-window {
+    text-align: center;
+    margin-left: auto;
+    font-family: "Roboto Thin", sans-serif;
+    margin-right: auto;
+    height: 380px;
+    border-radius: 20px;
+    margin-top: 14%;
+    color: #fff;
+    width: 500px;
+    background: rgba(26, 20, 66, 0.82);
+    opacity: 0.7;
+    z-index: 100;
+}
+
+textarea.mnemo-phrase {
+    resize: none;
+    width: 370px;
+    height: 104px;
+    overflow: hidden;
+}
+
+.form-text {
+    text-align: center;
+    margin-left: 17px;
+    width: 70px;
+    color: #fff;
+    justify-content: center;
+}
+
+.password {
+    margin-top: 8px;
+    width: 370px;
+    height: 30px;
+}
+
+#submit__button {
+    width: 200px;
+    margin-top: -19px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 40px;
+    background: #bacbe6;
+    border-radius: 7px;
+}
+
+.refresh-mnemo-button {
+    height: 35px;
+    margin-left: auto;
+    cursor: pointer;
+    margin-right: auto;
+    margin-top: 5px;
+    width: 35px;
+}
+
+.errors {
+    color: #ff544d;
+    margin-top: 10px;
+    height: 50px;
+}

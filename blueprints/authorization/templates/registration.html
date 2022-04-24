@@ -1,47 +1,49 @@
 {% extends "base.html" %}
-
+{% block head %}
+    <link rel="stylesheet" href="/static/css/registration.css">
+{% endblock %}
 {% block content %}
-<h1>Registration</h1>
-<form action="" method="post">
-    {{ form.hidden_tag() }}
-    {{ fingerprint_input }}
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul class=flashes>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-    <p>
-        {{ form.mnemo.label }}<br>
-        {{ form.mnemo(class="form-control", type="text") }}<br>
-        {% for error in form.mnemo.errors %}
-    <p class="alert alert-danger" role="alert">
-        {{ error }}
-    </p>
-    {% endfor %}
-    </p>
-    <p>
-        {{ form.password.label }}<br>
-        {{ form.password(class="form-control", type="password") }}<br>
-        {% for error in form.password.errors %}
-    <p class="alert alert-danger" role="alert">
-        {{ error }}
-    </p>
-    {% endfor %}
-    </p>
-    <p>
-        {{ form.password_again.label }}<br>
-        {{ form.password_again(class="form-control", type="password") }}<br>
-        {% for error in form.password_again.errors %}
-    <p class="alert alert-danger" role="alert">
-        {{ error }}
-    </p>
-    {% endfor %}
-    </p>
-    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
-    {{message}}
-</form>
+    <div class="main-window">
+        <h2>Registration</h2>
+        <form id="registration-form">
+            <div class="row">
+                <div class="col-2 form-text">Mnemo phrase
+                    <div class="refresh-mnemo-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="refresh-icon" viewBox="0 0 512 512"><title>
+                            Refresh</title>
+                            <path d="M320 146s24.36-12-64-12a160 160 0 10160 160" fill="none" stroke="currentColor"
+                                  stroke-linecap="round" stroke-miterlimit="10" stroke-width="32"/>
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                  stroke-width="32" d="M256 58l80 80-80 80"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <textarea class="mnemo-phrase" placeholder="Enter your mnemo phrase">{{ mnemo_phrase }}</textarea>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-2 form-text">Password</div>
+                <div class="col-8">
+                    <input id="password" class="password" placeholder="Enter password for wallet">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-2 form-text">Password again</div>
+                <div class="col-8">
+                    <input id="password-again" class="password" placeholder="Repeat password">
+                </div>
+            </div>
+            <div class="errors">
+
+            </div>
+            <div class="row">
+                <input type="submit" id="submit__button" value="SEND">
+            </div>
+
+        </form>
+    </div>
+    <script src="/static/js/registration.js"></script>
 {% endblock %}

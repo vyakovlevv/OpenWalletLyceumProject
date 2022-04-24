@@ -1,9 +1,8 @@
 import os
-import flask_login
 from db_utils import db_session
 from blueprints.authorization import authorization
 from blueprints.home import home
-from flask import Flask, request, render_template, redirect, make_response
+from flask import Flask, request, redirect, make_response
 import bfa
 from blueprints.home import home_api
 from db_models.users import User
@@ -41,11 +40,19 @@ def load_user(user_id):
 
 
 @app.route('/logout')
-@login_required
 def logout():
     logout_user()
     resp = make_response(redirect("/"))
     resp.delete_cookie('secured_code')
+    resp.delete_cookie('session')
+    return resp
+
+
+@app.route('/block')
+@login_required
+def block_wallet():
+    logout_user()
+    resp = make_response(redirect("/"))
     resp.delete_cookie('session')
     return resp
 
