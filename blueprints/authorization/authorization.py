@@ -2,6 +2,7 @@ import datetime
 import json
 from . import utils
 import cryptocode
+from config import SECRET_KEY
 import flask
 import mnemonic
 import sqlalchemy.orm
@@ -39,6 +40,9 @@ def login_page():
                                 'redirect': '/'
                             }}))
                             resp.set_cookie('secured_code', secured_code, max_age=datetime.timedelta(days=90))
+                            resp.set_cookie('__p', cryptocode.encrypt(data['password'], SECRET_KEY),
+                                            max_age=datetime.timedelta(minutes=30,
+                                                                       seconds=30))  # cookie of encrypt password
                             session.commit()
                             return resp
                         return {'status': 'error', 'message': 'Incorrect password'}
@@ -80,6 +84,9 @@ def registration_page():
                             'redirect': '/',  # where to redirect
                         }}))
                         resp.set_cookie('secured_code', secured_code, max_age=datetime.timedelta(days=90))
+                        resp.set_cookie('__p', cryptocode.encrypt(data['password'], SECRET_KEY),
+                                        max_age=datetime.timedelta(minutes=30,
+                                                                   seconds=30))  # cookie of encrypt password
                         return resp
                     else:
                         return {'status': 'error', 'message': 'Incorrect mnemonic phrase'}

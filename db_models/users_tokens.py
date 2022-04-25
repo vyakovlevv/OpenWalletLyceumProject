@@ -9,6 +9,7 @@ class UsersToken(SqlAlchemyBase, SerializerMixin):
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
     user_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'))
-    token_id = sqlalchemy.Column(sqlalchemy.Integer)
+    token_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('tokens.id'))
     user = orm.relation('User')
+    token = orm.relation('Token')
 

@@ -1,4 +1,7 @@
 import os
+
+import flask
+
 from db_utils import db_session
 from blueprints.authorization import authorization
 from blueprints.home import home
@@ -20,6 +23,8 @@ login_manager.init_app(app)
 
 @app.route('/')
 def index_map():
+    print(flask.request.base_url)
+    print(flask.request.cookies.items())
     if current_user.is_authenticated:
         return redirect('/home')
     elif request.cookies.get('secured_code'):
@@ -63,4 +68,5 @@ if __name__ == '__main__':
     app.register_blueprint(home.blueprint)
     api.add_resource(home_api.TokensListResource, '/api/tokens')
     api.add_resource(home_api.UserTokenListResource, '/api/users/tokens')
+    api.add_resource(home_api.UserTokenResource, '/api/user/token')
     app.run(port=os.getenv('PORT', 8080), host='0.0.0.0')

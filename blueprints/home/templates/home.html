@@ -1,6 +1,27 @@
 {% extends "base.html" %}
 {% block head %}
+    <link rel="stylesheet" href="/static/css/home.css">
 {% endblock %}
 {% block content %}
-
+    <div>
+        <canvas id="statistics_crypto_chart" class="canvas-crypto-chart"></canvas>
+    </div>
+    <div class="content-home">
+    </div>
+    <div id="modal-window-receive-funds" class="modal-window-receive-funds">
+        <div class="modal-content-receive-funds">
+            <span class="close-modal-window-receive-funds">&times;</span>
+            <p class="text-modal-window-receive-funds"></p>
+            <p class="expand-data-modal-window-receive-funds"></p>
+        </div>
+    <div id="modal-window-send-funds" class="modal-window-send-funds">
+        <div class="modal-content-send-funds">
+            <span class="close-modal-window-send-funds">&times;</span>
+            <p class="text-modal-window-send-funds"></p>
+            <p class="expand-data-modal-window-send-funds"></p>
+        </div>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/js/home.js"></script>
 {% endblock %}

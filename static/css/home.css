@@ -1,0 +1,272 @@
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+#statistics_crypto_chart {
+    position: relative;
+    z-index: -1;
+}
+
+.canvas-crypto-chart {
+    transform: translate(0%, -30%);
+}
+
+.content-home {
+    margin-top: -800px;
+    z-index: 10;
+}
+
+.collapsible {
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    justify-content: center;
+    outline: none;
+    font-size: 15px;
+    margin-top: 20px;
+}
+
+.active, .collapsible:hover {
+    background-color: #555;
+}
+
+.item-collapse-content {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f1f1f1;
+}
+
+.text-full-name-collapse-content {
+    text-align: left;
+}
+
+.text-blockchain-collapse-content {
+    text-align: left;
+    color: #555
+}
+
+.text-amount-collapse-content {
+    text-align: right;
+    color: #ffffff;
+}
+
+.custom_navbar {
+    position: fixed;
+}
+
+.MuiButtonBase-root {
+    color: inherit;
+    border: 0;
+    cursor: pointer;
+    margin: 0;
+    display: inline-flex;
+    outline: 0;
+    padding: 0;
+    position: relative;
+    align-items: center;
+    border-radius: 0;
+    vertical-align: middle;
+    -moz-appearance: none;
+    justify-content: center;
+    text-decoration: none;
+    -moz-user-select: none;
+    background-color: transparent;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.MuiButtonBase-root::-moz-focus-inner {
+    border-style: none;
+}
+
+.MuiButtonBase-root.Mui-disabled {
+    cursor: default;
+    pointer-events: none;
+}
+
+@media print {
+    .MuiButtonBase-root {
+        color-adjust: exact;
+    }
+}
+
+.MuiButton-root {
+    color: #fff;
+    padding: 6px 16px;
+    font-size: 0.875rem;
+    min-width: 64px;
+    box-sizing: border-box;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 500;
+    line-height: 1.75;
+    border-radius: 4px;
+    letter-spacing: 0.02857em;
+    text-transform: uppercase;
+}
+
+.MuiButton-root:hover {
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.MuiButton-root.Mui-disabled {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+@media (hover: none) {
+    .MuiButton-root:hover {
+        background-color: transparent;
+    }
+}
+
+.MuiButton-root:hover.Mui-disabled {
+    background-color: transparent;
+}
+
+.MuiButton-label {
+    width: 100%;
+    display: inherit;
+    align-items: inherit;
+    justify-content: inherit;
+}
+
+.MuiButton-outlined {
+    border: 1px solid rgba(255, 255, 255, 0.23);
+    padding: 5px 15px;
+}
+
+.MuiButton-outlined.Mui-disabled {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.MuiButton-outlinedPrimary {
+    color: #2196f3;
+    border: 1px solid rgba(33, 150, 243, 0.5);
+}
+
+.MuiButton-outlinedPrimary:hover {
+    border: 1px solid #2196f3;
+    background-color: rgba(33, 150, 243, 0.08);
+}
+
+@media (hover: none) {
+    .MuiButton-outlinedPrimary:hover {
+        background-color: transparent;
+    }
+}
+
+
+.MuiButton-startIcon {
+    display: inherit;
+    margin-left: -4px;
+    margin-right: 8px;
+}
+
+.MuiButton-iconSizeMedium > *:first-child {
+    font-size: 20px;
+}
+
+.MuiSvgIcon-root {
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    font-size: 1.5rem;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    flex-shrink: 0;
+    -moz-user-select: none;
+}
+
+.MuiTouchRipple-root {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    overflow: hidden;
+    position: absolute;
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+.MuiTypography-root {
+    margin: 0;
+}
+
+.MuiTypography-body2 {
+    font-size: 0.875rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.43;
+    letter-spacing: 0.01071em;
+}
+
+.MuiLink-underlineHover {
+    text-decoration: none;
+}
+
+.MuiLink-underlineHover:hover {
+    text-decoration: underline;
+}
+
+.MuiTypography-colorPrimary {
+    color: #2196f3;
+}
+
+.button-receive-funds {
+    justify-content: center;
+}
+
+.button-send-funds {
+    justify-content: right;
+}
+
+.text-address-collapse-content {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.modal-window-receive-funds, .modal-window-send-funds {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+
+.modal-content-receive-funds, .modal-content-send-funds {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close-modal-window-receive-funds, .close-modal-window-send-funds {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-modal-window-receive-funds:hover,
+.close-modal-window-receive-funds:focus,
+.close-modal-window-send-funds:hover,
+.close-modal-window-send-funds:focus{
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

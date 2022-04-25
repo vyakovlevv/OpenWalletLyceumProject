@@ -1,7 +1,19 @@
-#particles-js {
-    position: absolute;
+body, html {
     width: 100%;
     height: 100%;
+}
+
+
+#particles-js {
+    position: fixed;
+    min-width: 100%;
+    min-height: 100%;
     background: linear-gradient(to top left, #8c45a9, #4016c1);
-    background-size: 100%;
+    z-index: -1;
+}
+
+.custom_navbar {
+    position: relative;
+    z-index: 100;
+    min-width: 100%;
 }

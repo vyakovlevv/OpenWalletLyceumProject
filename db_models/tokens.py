@@ -14,6 +14,7 @@ class Token(SqlAlchemyBase, SerializerMixin):
     blockchain_gecko_id = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     contract_address = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     current_price = sqlalchemy.Column(sqlalchemy.Float, default=0)
+    color = sqlalchemy.Column(sqlalchemy.String, nullable=False)
 
     def update_current_price(self, new_price: int):
         self.current_price = new_price
