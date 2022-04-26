@@ -21,7 +21,36 @@
     <div id="modal-window-send-funds" class="modal-window-send-funds">
         <div class="modal-content-send-funds">
             <span class="close-modal-window-send-funds">&times;</span>
-            <p class="text-modal-window-send-funds"></p>
+            <p class="text-modal-window-send-funds">
+            <form id="form-modal-send-funds">
+                <input type="hidden" name="blockchain_gecko_id" value="" id="blockchain_gecko_id-input-form">
+                <input type="hidden" name="contract_address" value="" id="contract_address-input-form">
+                <table>
+
+                    <tr>
+                        <th class="label-input-modal-window-add-token">Destination address</th>
+                        <th class="input-data-modal-add-token"><input name="destination_address" id="destination_address-modal-window"></th>
+                    </tr>
+                    <tr>
+                        <th class="label-input-modal-window-add-token">Amount</th>
+                        <th class="input-data-modal-add-token"><input name="amount" id="amount-modal-window"></th>
+                    </tr>
+                    <tr>
+                        <th class="label-input-modal-window-add-token">Wallet Password</th>
+                        <th class="input-data-modal-add-token"><input name="wallet_password" id="wallet_password-modal-window"></th>
+                    </tr>
+                    <tr>
+                        <th id="errors-modal-send-funds"></th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <input type="submit" value="SEND" id="submit-button-modal-window">
+                        </th>
+                    </tr>
+                </table>
+            </form>
+            </p>
+
             <p class="expand-data-modal-window-send-funds"></p>
         </div>
     </div>

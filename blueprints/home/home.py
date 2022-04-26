@@ -1,6 +1,11 @@
 import base64
+import json
 import string
 
+import mnemonic
+from . import utils
+from config import SECRET_KEY
+import cryptocode
 import flask
 import qrcode
 import os
@@ -50,3 +55,37 @@ def api_qr_addresses():
         os.remove(name)
         return {'status': 'ok', 'result': encoded_string.decode('utf-8')}
     return {'status': 'error', 'message': 'Bad request'}
+
+
+@blueprint.route('/api/transaction/checkPassword', methods=['POST'])
+def api_transaction_check_password():
+    data = json.loads(flask.request.data)
+    if data.get('password'):
+        mnemo = mnemonic.Mnemonic('english')
+        if mnemo.check(cryptocode.decrypt(current_user.mnemo, current_user.fingerprint + data.get('password'))):
+            return {'status': 'ok'}
+        return {'status': 'error', 'message': 'incorrect password'}
+    return {'status': 'error', 'message': 'Missing password'}
+
+
+@blueprint.route('/api/transaction', methods=['POST'])
+def api_transaction():
+    data = json.loads(flask.request.data)
+    mnemo_class = mnemonic.Mnemonic('english')
+    mnemo = cryptocode.decrypt(current_user.mnemo, current_user.fingerprint + data.get('password'))
+    blockchain_gecko_id = data.get('blockchain_gecko_id')
+    if mnemo_class.check(mnemo):
+        if blockchain_gecko_id == 'binance-smart-chain':
+            r = utils.withdrawal_tokens_in_ethereum_similar_networks('https://rpc.ankr.com/bsc',
+                                                                     data.get('destination_address'),
+                                                                     data.get('amount_tokens'), mnemo,
+                                                                     data.get('contract_address'), 56)
+            return r
+        elif blockchain_gecko_id == 'ethereum':
+            r = utils.withdrawal_tokens_in_ethereum_similar_networks('https://rpc.ankr.com/eth',
+                                                                     data.get('destination_address'),
+                                                                     data.get('amount_tokens'), mnemo,
+                                                                     data.get('contract_address'), 1)
+            return r
+
+    return {'status': 'error', 'message': 'Authentication error'}

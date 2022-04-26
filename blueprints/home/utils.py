@@ -25,6 +25,7 @@ def get_hd_wallet(mnemo: str, coin):
 
 def get_address_btc(mnemo, coin=HdWalletBip44Coins.BITCOIN):
     hd_wallet = get_hd_wallet(mnemo, coin)
+    print(hd_wallet.ToDict())
     return hd_wallet.ToDict()['address']['address_0']['address']
 
 
@@ -46,8 +47,38 @@ def get_balance_ethereum_similar_tokens(uri_node: str, wallet_address: str, toke
     token_balance = token.functions.balanceOf(wallet_address).call()
     return float(w3.fromWei(token_balance, 'ether'))
 
-# FIXME Под каждый блокчейн надо написать функцию которая будет передавать в get_address mnemo и
-#  разновидность HdWalletBip44Coins и получать своим способом баланс откуда то
-# print(get_address_btc("glad reopen cake mule city direct aunt nature hill library spawn remain",))
-# print(get_balance_ethereum_similar_tokens('https://rpc.ankr.com/bsc', '0x894424A5FF388C28EccE85d82735DaDA700828D4', '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56'))
+
+def withdrawal_tokens_in_ethereum_similar_networks(uri_node, destination_address, amount_tokens, mnemo,
+                                                   contract_address, network_id):
+    try:
+        w3 = Web3(Web3.HTTPProvider(uri_node))
+        hd_wallet = get_hd_wallet(mnemo, HdWalletBip44Coins.ETHEREUM)
+        wallet_address = get_address_eth(mnemo)
+        contract_address = w3.toChecksumAddress(contract_address)
+        destination_address = w3.toChecksumAddress(destination_address)
+        abi = '[{"anonymous": false,"inputs": [{"indexed": true,"internalType": "address","name": "owner","type": "address"},{"indexed": true,"internalType": "address","name": "spender","type": "address"},{"indexed": false,"internalType": "uint256","name": "value","type": "uint256"}],"name": "Approval","type": "event"},{"anonymous": false,"inputs": [{"indexed": true,"internalType": "address","name": "from","type": "address"},{"indexed": true,"internalType": "address","name": "to","type": "address"},{"indexed": false,"internalType": "uint256","name": "value","type": "uint256"}],"name": "Transfer","type": "event"},{"constant": true,"inputs": [{"internalType": "address","name": "_owner","type": "address"},{"internalType": "address","name": "spender","type": "address"}],"name": "allowance","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"payable": false,"stateMutability": "view","type": "function"},{"constant": false,"inputs": [{"internalType": "address","name": "spender","type": "address"},{"internalType": "uint256","name": "amount","type": "uint256"}],"name": "approve","outputs": [{"internalType": "bool","name": "","type": "bool"}],"payable": false,"stateMutability": "nonpayable","type": "function"},{"constant": true,"inputs": [{"internalType": "address","name": "account","type": "address"}],"name": "balanceOf","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"payable": false,"stateMutability": "view","type": "function"},{"constant": true,"inputs": [],"name": "decimals","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"payable": false,"stateMutability": "view","type": "function"},{"constant": true,"inputs": [],"name": "getOwner","outputs": [{"internalType": "address","name": "","type": "address"}],"payable": false,"stateMutability": "view","type": "function"},{"constant": true,"inputs": [],"name": "name","outputs": [{"internalType": "string","name": "","type": "string"}],"payable": false,"stateMutability": "view","type": "function"},{"constant": true,"inputs": [],"name": "symbol","outputs": [{"internalType": "string","name": "","type": "string"}],"payable": false,"stateMutability": "view","type": "function"},{"constant": true,"inputs": [],"name": "totalSupply","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"payable": false,"stateMutability": "view","type": "function"},{"constant": false,"inputs": [{"internalType": "address","name": "recipient","type": "address"},{"internalType": "uint256","name": "amount","type": "uint256"}],"name": "transfer","outputs": [{"internalType": "bool","name": "","type": "bool"}],"payable": false,"stateMutability": "nonpayable","type": "function"},{"constant": false,"inputs": [{"internalType": "address","name": "sender","type": "address"},{"internalType": "address","name": "recipient","type": "address"},{"internalType": "uint256","name": "amount","type": "uint256"}],"name": "transferFrom","outputs": [{"internalType": "bool","name":"","type": "bool"}],"payable": false,"stateMutability": "nonpayable","type": "function"}]'
+        token = w3.eth.contract(address=contract_address, abi=abi)
+        token_balance = token.functions.balanceOf(wallet_address).call()
+        gas_limit = 80000
+        nonce = w3.eth.getTransactionCount(wallet_address)
+        if float(float(w3.fromWei(token_balance, 'ether'))) >= float(amount_tokens):
+            if w3.eth.get_balance(wallet_address) - (5000000000 * gas_limit) > 0:
+                transaction = token.functions.transfer(destination_address,
+                                                       int(Web3.toHex(w3.toWei(amount_tokens, 'ether')),
+                                                           16)).buildTransaction(
+                    {'chainId': network_id,
+                     'gas': gas_limit,
+                     'gasPrice': w3.toWei(5, 'gwei'),
+                     'nonce': nonce})
+                signed_tx = w3.eth.account.sign_transaction(transaction,
+                                                            hd_wallet.ToDict()['address']['address_0']['raw_priv'])
+                tx_hash = w3.eth.sendRawTransaction(signed_tx.rawTransaction)
+                return {'status': 'ok', 'result': str(w3.toHex(tx_hash))}
+            return {'status': 'error', 'message': 'Insufficient funds (gas)'}
+        return {'status': 'error', 'message': 'Insufficient funds (tokens)'}
+    except Exception as ex:
+        print(ex)
+        return {'status': 'error', 'message': 'Unexpected error'}
+
+
 print(generate_unique_hex_color())

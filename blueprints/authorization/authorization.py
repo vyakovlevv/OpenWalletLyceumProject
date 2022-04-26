@@ -85,8 +85,7 @@ def registration_page():
                         }}))
                         resp.set_cookie('secured_code', secured_code, max_age=datetime.timedelta(days=90))
                         resp.set_cookie('__p', cryptocode.encrypt(data['password'], SECRET_KEY),
-                                        max_age=datetime.timedelta(minutes=30,
-                                                                   seconds=30))  # cookie of encrypt password
+                                        max_age=datetime.timedelta(minutes=60))  # cookie of encrypt password
                         return resp
                     else:
                         return {'status': 'error', 'message': 'Incorrect mnemonic phrase'}

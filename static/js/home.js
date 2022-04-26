@@ -39,7 +39,10 @@ let myChart = null
 
 // const timerFetchTokensId = setInterval(, 3000);
 function send_funds(item_data) {
-    alert('send funds')
+    let modal_window = document.querySelector('#modal-window-send-funds')
+    document.querySelector('#blockchain_gecko_id-input-form').value = item_data['blockchain_gecko_id']
+    document.querySelector('#contract_address-input-form').value = item_data['contract_address']
+    modal_window.style.display = 'block'
 }
 
 function receive_funds(address) {
@@ -59,7 +62,7 @@ function try_show_chart_statistics() {
             document.getElementById('statistics_crypto_chart'),
             config
         );
-       document.querySelector('.content-home').style.marginTop = -800 + 'px'
+        document.querySelector('.content-home').style.marginTop = -800 + 'px'
     }
 }
 
@@ -169,4 +172,42 @@ window.addEventListener('click', function (e) {
     if (e.target == modal_window_add_token) {
         modal_window_add_token.style.display = "none";
     }
+})
+
+document.querySelector('#form-modal-send-funds').addEventListener('submit', function (e) {
+    e.preventDefault()
+    let errors_container = document.querySelector('#errors-modal-send-funds')
+    const blockchain_gecko_id = document.querySelector('#blockchain_gecko_id-input-form').value
+    const contract_address = document.querySelector('#contract_address-input-form').value
+    const destination_address = document.querySelector('#destination_address-modal-window').value
+    const amount_tokens = document.querySelector('#amount-modal-window').value
+    const password = document.querySelector('#wallet_password-modal-window').value
+    const url_check_password = '/api/transaction/checkPassword'
+    fetch(url_check_password, {
+        'method': 'POST',
+        'body': JSON.stringify({'password': password})
+    }).then(async r => {
+        const json = await r.json();
+        if (json['status'] === 'ok') {
+            const url_transaction = '/api/transaction'
+            fetch(url_transaction, {
+                'method': 'POST',
+                'body': JSON.stringify({
+                    'password': password,
+                    'blockchain_gecko_id': blockchain_gecko_id,
+                    'contract_address': contract_address,
+                    'destination_address': destination_address,
+                    'amount_tokens': amount_tokens
+                })}).then(async r => {
+                const json = await r.json();
+                if (json['status'] === 'ok') {
+                    alert('Transaction completed successfully')
+                } else {
+                    errors_container.innerHTML = json['message']
+                }
+            })
+        } else {
+            errors_container.innerHTML = json['message']
+        }
+    })
 })

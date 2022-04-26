@@ -62,7 +62,8 @@ class UserTokenListResource(Resource):
                 tokens = []
                 for i in data:
                     try:
-                        token = i.token.to_dict(only=('abbreviation', 'full_name', 'blockchain', 'current_price', 'color'))
+                        token = i.token.to_dict(only=(
+                            'abbreviation', 'full_name', 'blockchain', 'current_price', 'color', 'blockchain_gecko_id', 'contract_address'))
                         params = {
                             'token': i.token.abbreviation,
                             'fp': flask.request.args.get('fp'),
