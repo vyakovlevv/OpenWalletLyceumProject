@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="471b0d8b-2e55-43fd-b51f-2d178e3b73b1" name="Changes" comment="correct">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -270,7 +269,7 @@
       <workItem from="1650901383282" duration="5787000" />
       <workItem from="1650907950798" duration="15459000" />
       <workItem from="1650985706245" duration="431000" />
-      <workItem from="1650986148098" duration="22542000" />
+      <workItem from="1650986148098" duration="22743000" />
     </task>
     <task id="LOCAL-00001" summary="update registration, authorization, background in base.html">
       <created>1650758698727</created>
