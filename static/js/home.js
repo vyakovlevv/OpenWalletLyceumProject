@@ -53,6 +53,16 @@ function receive_funds(address) {
     })
 }
 
+function try_show_chart_statistics() {
+    if (data['datasets'][0]['data'].length > 0) {
+        myChart = new Chart(
+            document.getElementById('statistics_crypto_chart'),
+            config
+        );
+       document.querySelector('.content-home').style.marginTop = -800 + 'px'
+    }
+}
+
 function addTokenElement(item_data, parent) {
     let button = document.createElement('button')
     button.className = 'collapsible'
@@ -122,24 +132,21 @@ function addTokenElement(item_data, parent) {
 }
 
 function load_tokens() {
-    const data = {
+    const data_request = {
         offset: 15,
         indexStart: 0,
         fp: document.querySelector('#fingerprint').querySelector('input').value,
         secured_code: getCookie('secured_code')
     }
-    const content_home = document.querySelector('.content-home')
-    const url = '/api/users/tokens' + '?offset=' + data.offset + '&indexStart=' + data.indexStart + '&fp=' + data.fp + '&secured_code=' + data.secured_code
+    const content_home = document.querySelector('.content-token-home')
+    const url = '/api/users/tokens' + '?offset=' + data_request.offset + '&indexStart=' + data_request.indexStart + '&fp=' + data_request.fp + '&secured_code=' + data_request.secured_code
     fetch(url, {'method': 'GET'}).then(async r => {
         const json = await r.json();
         if (json['status'] === 'ok') {
             for (let i = 0; i < json['tokens'].length; i++) {
                 addTokenElement(json['tokens'][i], content_home)
             }
-            myChart = new Chart(
-                document.getElementById('statistics_crypto_chart'),
-                config
-            );
+            try_show_chart_statistics()
         } else {
             alert(json['message'])
         }
@@ -148,5 +155,18 @@ function load_tokens() {
 
 document.addEventListener('DOMContentLoaded', function () {
     setTimeout(load_tokens, 500)
-    // load_tokens()
 }, false);
+let modal_window_add_token = document.querySelector('#modal-window-add-token')
+document.querySelector('.add-token-button').addEventListener('click', function () {
+    modal_window_add_token.style.display = 'block'
+})
+
+
+document.querySelector('.close-modal-window-add-token').addEventListener('click', function (e) {
+    modal_window_add_token.style.display = "none";
+})
+window.addEventListener('click', function (e) {
+    if (e.target == modal_window_add_token) {
+        modal_window_add_token.style.display = "none";
+    }
+})

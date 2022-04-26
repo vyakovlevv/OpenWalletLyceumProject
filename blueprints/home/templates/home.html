@@ -7,13 +7,17 @@
         <canvas id="statistics_crypto_chart" class="canvas-crypto-chart"></canvas>
     </div>
     <div class="content-home">
+        <div class="content-token-home"></div>
+        <button class="add-token-button">Add Token to wallet</button>
     </div>
+
     <div id="modal-window-receive-funds" class="modal-window-receive-funds">
         <div class="modal-content-receive-funds">
             <span class="close-modal-window-receive-funds">&times;</span>
             <p class="text-modal-window-receive-funds"></p>
             <p class="expand-data-modal-window-receive-funds"></p>
         </div>
+    </div>
     <div id="modal-window-send-funds" class="modal-window-send-funds">
         <div class="modal-content-send-funds">
             <span class="close-modal-window-send-funds">&times;</span>
@@ -21,7 +25,47 @@
             <p class="expand-data-modal-window-send-funds"></p>
         </div>
     </div>
+    <div id="modal-window-add-token" class="modal-window-add-token">
+        <div class="modal-content-add-token">
+            <span class="close-modal-window-add-token">&times;</span>
+            <p class="text-modal-window-add-token">
+            <form action="" method="post">
+                <table>
+
+                    <tr>
+                        <th class="label-input-modal-window-add-token">Token abbreviation</th>
+                        <th class="input-data-modal-add-token"><input name="abbreviation"></th>
+                    </tr>
+                    <tr>
+                        <th class="label-input-modal-window-add-token">Token full name</th>
+                        <th class="input-data-modal-add-token"><input name="full_name"></th>
+                    </tr>
+                    <tr>
+                        <th class="label-input-modal-window-add-token">Blockchain</th>
+                        <th class="input-data-modal-add-token">
+                            <select name="blockchain">
+                                <option disabled>Select blockchain</option>
+                                <option value="BEP20_binance-smart-chain">BEP20</option>
+                                <option value="ERC20_ethereum">ERC20</option>
+                            </select>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="label-input-modal-window-add-token">Contract address</th>
+                        <th class="input-data-modal-add-token"><input name="contract_address"></th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <input type="submit">
+                        </th>
+                    </tr>
+                </table>
+            </form>
+            </p>
+            <p class="expand-data-modal-window-add-token"></p>
+        </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/static/js/home.js"></script>
 {% endblock %}

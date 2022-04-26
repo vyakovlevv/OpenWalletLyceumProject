@@ -4,6 +4,8 @@ import mnemonic
 import requests
 from db_utils.db_session import create_session
 from db_models.tokens import Token
+from db_models.users_tokens import UsersToken
+from flask_login import current_user
 from db_models.users import User
 from config import SECRET_KEY
 from . import utils
@@ -22,23 +24,26 @@ class TokensListResource(Resource):
     def post(self):
         """Add tokens"""
         session = create_session()
-        args = parser.parse_args()
-        if session.query(Token).filter(Token.abbreviation == args['abbreviation'],
-                                       Token.blockchain == args['blockchain']).first():
-            return flask.jsonify({'status': 'error', 'message': 'Abbreviation in this blockchain already exists'})
-        if session.query(Token).filter(Token.contract_address == args['contract_address'],
-                                       Token.blockchain == args['blockchain']).first():
-            return flask.jsonify({'status': 'error', 'message': 'Contract address in this blockchain already exists'})
+        exist_token = session.query(Token).filter(Token.abbreviation == flask.request.form['abbreviation'],
+                                                  Token.blockchain == flask.request.form['blockchain']).first()
+        if exist_token:
+            return flask.jsonify({'status': 'ok', 'result': exist_token.id})
+        exist_token = session.query(Token).filter(Token.contract_address == flask.request.form['contract_address'],
+                                                  Token.blockchain == flask.request.form['blockchain']).first()
+        if exist_token:
+            return flask.jsonify({'status': 'ok', 'result': exist_token.id})
         token = Token(
-            abbreviation=args['abbreviation'],
-            full_name=args['full_name'],
-            blockchain=args['blockchain'],
-            contract_address=args['contract_address'] if args['contract_address'] else None,  # Fixme сделать .pyi файл
+            abbreviation=flask.request.form['abbreviation'],
+            full_name=flask.request.form['full_name'],
+            blockchain=flask.request.form['blockchain'],
+            blockchain_gecko_id=flask.request.form.get('blockchain_gecko_id'),
+            contract_address=flask.request.form['contract_address'] if flask.request.form['contract_address'] else None,
             color=utils.generate_unique_hex_color()
         )
         session.add(token)
         session.commit()
-        return flask.jsonify({'status': 'OK'})
+        print(f"TOKEN ID: {token.id}")
+        return flask.jsonify({'status': 'ok', 'result': token.id})
 
 
 class UserTokenListResource(Resource):
@@ -56,25 +61,50 @@ class UserTokenListResource(Resource):
                        int(flask.request.args.get('indexStart')):int(flask.request.args.get('indexStart')) + 15]
                 tokens = []
                 for i in data:
-                    token = i.token.to_dict(only=('abbreviation', 'full_name', 'blockchain', 'current_price', 'color'))
-                    params = {
-                        'token': i.token.abbreviation,
-                        'fp': flask.request.args.get('fp'),
-                        'blockchain_gecko_id': i.token.blockchain_gecko_id if i.token.blockchain_gecko_id else '',
-                        'token_address': i.token.contract_address if i.token.contract_address else ''
-                    }
-                    cookies = {}
-                    for key, val in flask.request.cookies.items():
-                        cookies[key] = val
-                    domen = '/'.join(flask.request.base_url.split('/')[:3])
-                    r = requests.get(f"{domen}/api/user/token", params=params, cookies=cookies).json()
-                    if r['status'] == 'ok':
-                        token['address'] = r['result']['address']
-                        token['balance'] = r['result']['balance']
-                        tokens.append(token)
+                    try:
+                        token = i.token.to_dict(only=('abbreviation', 'full_name', 'blockchain', 'current_price', 'color'))
+                        params = {
+                            'token': i.token.abbreviation,
+                            'fp': flask.request.args.get('fp'),
+                            'blockchain_gecko_id': i.token.blockchain_gecko_id if i.token.blockchain_gecko_id else '',
+                            'token_address': i.token.contract_address if i.token.contract_address else ''
+                        }
+                        cookies = {}
+                        for key, val in flask.request.cookies.items():
+                            cookies[key] = val
+                        domen = '/'.join(flask.request.base_url.split('/')[:3])
+                        r = requests.get(f"{domen}/api/user/token", params=params, cookies=cookies).json()
+                        if r['status'] == 'ok':
+                            token['address'] = r['result']['address']
+                            token['balance'] = r['result']['balance']
+                            tokens.append(token)
+                    except Exception as ex:
+                        print(ex)
                 return {'status': 'ok',
                         'tokens': tokens}
             return flask.jsonify({'status': 'error', 'message': 'User not found'})
+        except Exception as ex:
+            print(ex)
+            return {'status': 'error', 'message': 'Unexpected error'}
+
+    def post(self):
+        try:
+            session = create_session()
+            data = {
+                'abbreviation': flask.request.form.get('abbreviation'),
+                'full_name': flask.request.form.get('full_name'),
+                'blockchain': flask.request.form.get('blockchain'),
+                'blockchain_gecko_id': flask.request.form.get('blockchain_gecko_id'),
+                'contract_address': flask.request.form.get('contract_address')
+            }
+            r = requests.post(f"{flask.request.host_url}/api/tokens", data=data).json()
+            users_token = UsersToken(
+                user_id=current_user.id,
+                token_id=r['result']
+            )
+            session.add(users_token)
+            session.commit()
+            return {'status': 'ok'}
         except Exception as ex:
             print(ex)
             return {'status': 'error', 'message': 'Unexpected error'}

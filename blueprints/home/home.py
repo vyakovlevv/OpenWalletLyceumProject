@@ -5,6 +5,8 @@ import flask
 import qrcode
 import os
 import random
+
+import requests
 from flask_login import login_required, current_user
 
 blueprint = flask.Blueprint(
@@ -15,10 +17,25 @@ blueprint = flask.Blueprint(
 )
 
 
-@blueprint.route('/home')
+@blueprint.route('/home', methods=['GET', 'POST'])
 @login_required
 def homepage():
-    return flask.render_template('home.html')
+    if flask.request.method == 'GET':
+        return flask.render_template('home.html')
+    else:
+        data = {
+            'abbreviation': flask.request.form.get('abbreviation'),
+            'full_name': flask.request.form.get('full_name'),
+            'blockchain': flask.request.form.get('blockchain').split('_')[0],
+            'blockchain_gecko_id': flask.request.form.get('blockchain').split('_')[1],
+            'contract_address': flask.request.form.get('contract_address')
+        }
+        cookies = {}
+        for key, val in flask.request.cookies.items():
+            cookies[key] = val
+        r = requests.post(f"{flask.request.host_url}/api/users/tokens", data=data, cookies=cookies)
+        print(r.json())
+        return flask.redirect('/')
 
 
 @blueprint.route('/api/qr')

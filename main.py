@@ -1,7 +1,5 @@
 import os
-
 import flask
-
 from db_utils import db_session
 from blueprints.authorization import authorization
 from blueprints.home import home
