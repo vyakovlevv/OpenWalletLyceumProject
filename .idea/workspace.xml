@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="471b0d8b-2e55-43fd-b51f-2d178e3b73b1" name="Changes" comment="add requirements.txt">
-      <change afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wsgi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-    </list>
+    <list default="true" id="471b0d8b-2e55-43fd-b51f-2d178e3b73b1" name="Changes" comment="correct" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -271,7 +267,7 @@
       <workItem from="1650901383282" duration="5787000" />
       <workItem from="1650907950798" duration="15459000" />
       <workItem from="1650985706245" duration="431000" />
-      <workItem from="1650986148098" duration="21813000" />
+      <workItem from="1650986148098" duration="22144000" />
     </task>
     <task id="LOCAL-00001" summary="update registration, authorization, background in base.html">
       <created>1650758698727</created>
@@ -315,7 +311,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651009794319</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="correct">
+      <created>1651010142423</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1651010142423</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -339,7 +342,8 @@
     <MESSAGE value="all done" />
     <MESSAGE value="add config.py" />
     <MESSAGE value="add requirements.txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="add requirements.txt" />
+    <MESSAGE value="correct" />
+    <option name="LAST_COMMIT_MESSAGE" value="correct" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
