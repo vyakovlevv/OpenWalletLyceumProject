@@ -99,6 +99,7 @@ class UserTokenListResource(Resource):
                 'contract_address': flask.request.form.get('contract_address')
             }
             domen = '/'.join(flask.request.base_url.split('/')[:3])
+            print(f"DOMEN: {domen}")
             r = requests.post(f"{domen}/api/tokens", data=data).json()
             users_token = UsersToken(
                 user_id=current_user.id,
