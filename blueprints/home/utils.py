@@ -79,6 +79,3 @@ def withdrawal_tokens_in_ethereum_similar_networks(uri_node, destination_address
     except Exception as ex:
         print(ex)
         return {'status': 'error', 'message': 'Unexpected error'}
-
-
-print(generate_unique_hex_color())

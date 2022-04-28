@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="471b0d8b-2e55-43fd-b51f-2d178e3b73b1" name="Changes" comment="correct">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blueprints/home/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/blueprints/home/home.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blueprints/home/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/blueprints/home/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/db/database.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/wsgi.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +56,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python.utils">
+  <component name="RunManager" selected="Python.main">
     <configuration name="OpenWalletLyceumProject" type="PythonConfigurationType" factoryName="Python">
       <module name="OpenWalletLyceumProject" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -236,9 +238,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Flask server.Flask (main.py)" />
         <item itemvalue="Python.utils" />
         <item itemvalue="Python.home" />
-        <item itemvalue="Flask server.Flask (main.py)" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.authorization" />
       </list>
@@ -271,7 +273,9 @@
       <workItem from="1650901383282" duration="5787000" />
       <workItem from="1650907950798" duration="15459000" />
       <workItem from="1650985706245" duration="431000" />
-      <workItem from="1650986148098" duration="23904000" />
+      <workItem from="1650986148098" duration="24388000" />
+      <workItem from="1651070303642" duration="2946000" />
+      <workItem from="1651151456086" duration="4301000" />
     </task>
     <task id="LOCAL-00001" summary="update registration, authorization, background in base.html">
       <created>1650758698727</created>
@@ -379,9 +383,9 @@
     <SUITE FILE_PATH="coverage/OpenWalletLyceumProject$test.coverage" NAME="test Coverage Results" MODIFIED="1650921523322" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/OpenWalletLyceumProject$OpenWalletLyceumProject.coverage" NAME="OpenWalletLyceumProject Coverage Results" MODIFIED="1650757627362" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/OpenWalletLyceumProject$utils.coverage" NAME="utils Coverage Results" MODIFIED="1651009585995" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/blueprints/home" />
-    <SUITE FILE_PATH="coverage/OpenWalletLyceumProject$Flask__main_py_.coverage" NAME="Flask (main.py) Coverage Results" MODIFIED="1650986234339" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/OpenWalletLyceumProject$Flask__main_py_.coverage" NAME="Flask (main.py) Coverage Results" MODIFIED="1651162606524" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/OpenWalletLyceumProject$authorization.coverage" NAME="authorization Coverage Results" MODIFIED="1650717148043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/blueprints/authorization" />
     <SUITE FILE_PATH="coverage/OpenWalletLyceumProject$home.coverage" NAME="home Coverage Results" MODIFIED="1650996848648" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/blueprints/home" />
-    <SUITE FILE_PATH="coverage/OpenWalletLyceumProject$main.coverage" NAME="main Coverage Results" MODIFIED="1651008328304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/OpenWalletLyceumProject$main.coverage" NAME="main Coverage Results" MODIFIED="1651162611720" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

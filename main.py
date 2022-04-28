@@ -7,6 +7,7 @@ from flask import Flask, request, redirect, make_response
 import bfa
 from blueprints.home import home_api
 from db_models.users import User
+import logging
 from flask_restful import Api
 from flask_login import LoginManager, login_required, logout_user, current_user
 from config import *
@@ -17,6 +18,12 @@ app.config['SECRET_KEY'] = SECRET_KEY
 api = Api(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG
+)
+
+logger = logging.getLogger(__name__)
 
 
 @app.route('/')
@@ -68,15 +75,5 @@ api.add_resource(home_api.UserTokenListResource, '/api/users/tokens')
 api.add_resource(home_api.UserTokenResource, '/api/user/token')
 
 
-def main():
-    db_session.global_init("db/database.db")
-    app.register_blueprint(authorization.blueprint)
-    app.register_blueprint(home.blueprint)
-    api.add_resource(home_api.TokensListResource, '/api/tokens')
-    api.add_resource(home_api.UserTokenListResource, '/api/users/tokens')
-    api.add_resource(home_api.UserTokenResource, '/api/user/token')
-    app.run(port=os.getenv('PORT', 8080), host='0.0.0.0')
-
-
 if __name__ == '__main__':
-    main()
+    app.run(port=os.getenv('PORT', 8080), host='0.0.0.0')
