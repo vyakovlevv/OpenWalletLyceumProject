@@ -98,7 +98,8 @@ class UserTokenListResource(Resource):
                 'blockchain_gecko_id': flask.request.form.get('blockchain_gecko_id'),
                 'contract_address': flask.request.form.get('contract_address')
             }
-            r = requests.post(f"{flask.request.url_root}/api/tokens", data=data).json()
+            domen = '/'.join(flask.request.base_url.split('/')[:3])
+            r = requests.post(f"{domen}/api/tokens", data=data).json()
             users_token = UsersToken(
                 user_id=current_user.id,
                 token_id=r['result']
