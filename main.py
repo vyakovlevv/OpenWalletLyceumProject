@@ -29,6 +29,7 @@ logger = logging.getLogger(__name__)
 @app.route('/')
 def index_map():
     print(flask.request.base_url)
+    print(flask.request.url_root)
     print(flask.request.cookies.items())
     if current_user.is_authenticated:
         return redirect('/home')
