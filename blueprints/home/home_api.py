@@ -101,12 +101,14 @@ class UserTokenListResource(Resource):
             domen = '/'.join(flask.request.base_url.split('/')[:3])
             print(f"DOMEN: {domen}")
             r = requests.post(f"{domen}/api/tokens", data=data).json()
+            print(f"RESULT JSON: {r}")
             users_token = UsersToken(
                 user_id=current_user.id,
                 token_id=r['result']
             )
             session.add(users_token)
             session.commit()
+            print(f"FINAL STATE RETURN")
             return {'status': 'ok'}
         except Exception as ex:
             print(ex)
