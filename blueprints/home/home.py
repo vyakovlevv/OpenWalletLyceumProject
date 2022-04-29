@@ -40,7 +40,7 @@ def homepage():
             cookies[key] = val
         domen = '/'.join(flask.request.base_url.split('/')[:3])
         print(f'HOST URL: {domen}')
-        r = requests.post(f"{domen}api/users/tokens", data=data, cookies=cookies)
+        r = requests.post(f"{domen}/api/users/tokens", data=data, cookies=cookies)
         print(f"HOST REQUEST:{r.url}")
         print(f"HTTP STATUS CODE: {r.status_code}")
         return flask.redirect('/')
