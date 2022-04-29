@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="471b0d8b-2e55-43fd-b51f-2d178e3b73b1" name="Changes" comment="correct">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blueprints/home/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/blueprints/home/home.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blueprints/home/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/blueprints/home/templates/home.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -273,7 +273,7 @@
       <workItem from="1650986148098" duration="24388000" />
       <workItem from="1651070303642" duration="2946000" />
       <workItem from="1651151456086" duration="6561000" />
-      <workItem from="1651227922883" duration="1648000" />
+      <workItem from="1651227922883" duration="2427000" />
     </task>
     <task id="LOCAL-00001" summary="update registration, authorization, background in base.html">
       <created>1650758698727</created>
