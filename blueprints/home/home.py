@@ -39,7 +39,7 @@ def homepage():
         for key, val in flask.request.cookies.items():
             cookies[key] = val
         print(f'HOST URL: {flask.request.host_url}')
-        r = requests.post(f"{flask.request.host_url}/api/users/tokens", data=data, cookies=cookies)
+        r = requests.post(f"{flask.request.host_url}api/users/tokens", data=data, cookies=cookies)
         print(f"HOST REQUEST:{r.url}")
         return flask.redirect('/')
 
