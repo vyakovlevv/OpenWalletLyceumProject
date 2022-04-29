@@ -3,7 +3,6 @@ import json
 import string
 import threading
 import time
-
 import mnemonic
 from . import utils
 from config import SECRET_KEY
