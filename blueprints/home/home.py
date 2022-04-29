@@ -11,7 +11,6 @@ import flask
 import qrcode
 import os
 import random
-
 import requests
 from flask_login import login_required, current_user
 
