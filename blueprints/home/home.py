@@ -1,6 +1,8 @@
 import base64
 import json
 import string
+import threading
+import time
 
 import mnemonic
 from . import utils
@@ -40,9 +42,9 @@ def homepage():
             cookies[key] = val
         domen = '/'.join(flask.request.base_url.split('/')[:3])
         print(f'HOST URL: {domen}')
-        r = requests.post(f"{domen}/api/users/tokens", data=data, cookies=cookies, timeout=5)
-        print(f"HOST REQUEST:{r.url}")
-        print(f"HTTP STATUS CODE: {r.status_code}")
+        threading.Thread(target=requests.post,
+                         kwargs={'url': f"{domen}/api/users/tokens", 'data': data, 'cookies': cookies}).start()
+        time.sleep(3)
         return flask.redirect('/')
 
 
