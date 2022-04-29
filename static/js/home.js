@@ -201,7 +201,7 @@ document.querySelector('#form-modal-send-funds').addEventListener('submit', func
                 })}).then(async r => {
                 const json = await r.json();
                 if (json['status'] === 'ok') {
-                    alert('Transaction completed successfully')
+                    alert('Transaction completed successfully\nTx hash: ' + json['result'])
                 } else {
                     errors_container.innerHTML = json['message']
                 }
