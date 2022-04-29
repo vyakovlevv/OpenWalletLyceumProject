@@ -1,3 +1,5 @@
+import os
+
 import cryptocode
 import flask
 import mnemonic
@@ -100,7 +102,7 @@ class UserTokenListResource(Resource):
             }
             domen = '/'.join(flask.request.base_url.split('/')[:3])
             print(f"DOMEN: {domen}")
-            r = requests.post(f"{domen}/api/tokens", data=data).json()
+            r = requests.post(f"http://127.0.0.1:{os.getenv('PORT', 8080)}/api/tokens", data=data).json()
             print(f"RESULT JSON: {r}")
             users_token = UsersToken(
                 user_id=current_user.id,

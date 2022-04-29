@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="471b0d8b-2e55-43fd-b51f-2d178e3b73b1" name="Changes" comment="correct">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blueprints/home/home_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/blueprints/home/home_api.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -271,7 +272,8 @@
       <workItem from="1650985706245" duration="431000" />
       <workItem from="1650986148098" duration="24388000" />
       <workItem from="1651070303642" duration="2946000" />
-      <workItem from="1651151456086" duration="5349000" />
+      <workItem from="1651151456086" duration="6561000" />
+      <workItem from="1651227922883" duration="1234000" />
     </task>
     <task id="LOCAL-00001" summary="update registration, authorization, background in base.html">
       <created>1650758698727</created>
@@ -359,12 +361,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/blueprints/home/home_api.py</url>
-          <line>126</line>
+          <line>128</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/blueprints/home/home_api.py</url>
-          <line>26</line>
+          <line>28</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
