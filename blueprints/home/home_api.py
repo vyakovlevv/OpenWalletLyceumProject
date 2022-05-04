@@ -1,5 +1,4 @@
 import os
-
 import cryptocode
 import flask
 import mnemonic
@@ -21,10 +20,10 @@ parser.add_argument('contract_address', required=False)
 
 
 class TokensListResource(Resource):
-    """API Endpoint for add tokens"""
+    """API Endpoint for add tokens to common list tokens"""
 
     def post(self):
-        """Add tokens"""
+        """Add token"""
         session = create_session()
         exist_token = session.query(Token).filter(Token.abbreviation == flask.request.form['abbreviation'],
                                                   Token.blockchain == flask.request.form['blockchain']).first()
@@ -44,12 +43,14 @@ class TokensListResource(Resource):
         )
         session.add(token)
         session.commit()
-        print(f"TOKEN ID: {token.id}")
         return flask.jsonify({'status': 'ok', 'result': token.id})
 
 
 class UserTokenListResource(Resource):
+    """API Endpoint for work with user's tokens list"""
+
     def get(self):
+        """Get tokens list"""
         try:
             required_args = ['offset', 'indexStart', 'fp', 'secured_code']
             verdict = utils.control_required_keys(flask.request.args, required_args)
@@ -65,7 +66,8 @@ class UserTokenListResource(Resource):
                 for i in data:
                     try:
                         token = i.token.to_dict(only=(
-                            'abbreviation', 'full_name', 'blockchain', 'current_price', 'color', 'blockchain_gecko_id', 'contract_address'))
+                        'abbreviation', 'full_name', 'blockchain', 'current_price', 'color', 'blockchain_gecko_id',
+                        'contract_address'))
                         params = {
                             'token': i.token.abbreviation,
                             'fp': flask.request.args.get('fp'),
@@ -91,6 +93,7 @@ class UserTokenListResource(Resource):
             return {'status': 'error', 'message': 'Unexpected error'}
 
     def post(self):
+        """Add token to user's tokens list"""
         try:
             session = create_session()
             data = {
@@ -100,17 +103,13 @@ class UserTokenListResource(Resource):
                 'blockchain_gecko_id': flask.request.form.get('blockchain_gecko_id'),
                 'contract_address': flask.request.form.get('contract_address')
             }
-            domen = '/'.join(flask.request.base_url.split('/')[:3])
-            print(f"DOMEN: {domen}")
             r = requests.post(f"http://127.0.0.1:{os.getenv('PORT', 8080)}/api/tokens", data=data).json()
-            print(f"RESULT JSON: {r}")
             users_token = UsersToken(
                 user_id=current_user.id,
                 token_id=r['result']
             )
             session.add(users_token)
             session.commit()
-            print(f"FINAL STATE RETURN")
             return {'status': 'ok'}
         except Exception as ex:
             print(ex)
@@ -118,7 +117,10 @@ class UserTokenListResource(Resource):
 
 
 class UserTokenResource(Resource):
+    """API Endpoint for work with single user token"""
+
     def get(self):  # получить адрес и баланс
+        """Get user's token"""
         required_args = ['token', 'fp', 'blockchain_gecko_id', 'token_address']
         verdict = utils.control_required_keys(flask.request.args, required_args)
         if verdict != 'ok':

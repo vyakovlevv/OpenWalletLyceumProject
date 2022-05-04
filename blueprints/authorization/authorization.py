@@ -19,6 +19,14 @@ blueprint = flask.Blueprint(
 
 @blueprint.route('/login/', methods=['GET', 'POST'])
 def login_page():
+    """
+    Full-featured router of authorization for:
+     - getting a page
+     - getting client session
+     - getting other response
+
+    :return: page or other response
+    """
     if flask.request.method == 'GET':
         return flask.render_template('login.html', title='Login', now_login=True)
     else:
@@ -58,6 +66,13 @@ def login_page():
 
 @blueprint.route('/registration/', methods=['GET', 'POST'])
 def registration_page():
+    """
+    Full-featured router of registration for:
+     - getting a page
+     - adding a user to the database
+
+    :return: page or other response
+    """
     if flask.request.method == 'GET':
         return flask.render_template('registration.html', title='Registration')
     else:
@@ -98,6 +113,7 @@ def registration_page():
 
 @blueprint.route('/api/mnemo/refresh')
 def refresh_mnemo_api():
+    """Get new mnemo phrase (24 words)"""
     try:
         mnemo = mnemonic.Mnemonic('english')
         return {"status": 'ok', 'result': mnemo.generate(256)}
@@ -108,6 +124,7 @@ def refresh_mnemo_api():
 
 @blueprint.route('/api/mnemo/check', methods=['POST'])
 def check_mnemo_api():
+    """Router for check mnemo phrase on correct"""
     try:
         mnemo = mnemonic.Mnemonic('english')
         data = json.loads(str(flask.request.data.decode('utf-8')))

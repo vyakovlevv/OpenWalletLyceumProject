@@ -28,9 +28,7 @@ logger = logging.getLogger(__name__)
 
 @app.route('/')
 def index_map():
-    print(flask.request.base_url)
-    print(flask.request.url_root)
-    print(flask.request.cookies.items())
+    """Router to redirect the request to the desired page"""
     if current_user.is_authenticated:
         return redirect('/home')
     elif request.cookies.get('secured_code'):
@@ -41,6 +39,7 @@ def index_map():
 
 @app.context_processor
 def bfa_flask():
+    """Function for load hidden form with fingerprint in <header> in DOM content of page"""
     return bfa.templatetags.bfa.fingerprint_input()
 
 
@@ -74,7 +73,6 @@ app.register_blueprint(home.blueprint)
 api.add_resource(home_api.TokensListResource, '/api/tokens')
 api.add_resource(home_api.UserTokenListResource, '/api/users/tokens')
 api.add_resource(home_api.UserTokenResource, '/api/user/token')
-
 
 if __name__ == '__main__':
     app.run(port=os.getenv('PORT', 8080), host='0.0.0.0')

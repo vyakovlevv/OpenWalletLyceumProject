@@ -6,10 +6,14 @@ from web3 import Web3
 
 
 def generate_unique_hex_color():
+    """
+    return: color in hex format
+    """
     return '#' + ''.join(random.choices(string.digits + string.ascii_lowercase[:6], k=6))
 
 
 def control_required_keys(data: dict, required_keys: list) -> str:
+    """Function to check for entry of the required keys in data"""
     for key in required_keys:
         if key not in data:
             return key
@@ -25,7 +29,6 @@ def get_hd_wallet(mnemo: str, coin):
 
 def get_address_btc(mnemo, coin=HdWalletBip44Coins.BITCOIN):
     hd_wallet = get_hd_wallet(mnemo, coin)
-    print(hd_wallet.ToDict())
     return hd_wallet.ToDict()['address']['address_0']['address']
 
 
@@ -49,7 +52,17 @@ def get_balance_ethereum_similar_tokens(uri_node: str, wallet_address: str, toke
 
 
 def withdrawal_tokens_in_ethereum_similar_networks(uri_node, destination_address, amount_tokens, mnemo,
-                                                   contract_address, network_id):
+                                                   contract_address, network_id) -> dict:
+    """
+    Withdrawal of tokens in ethereum-like networks
+    :param uri_node: uri where locate node
+    :param destination_address: where to send wallet
+    :param amount_tokens: amount tokens
+    :param mnemo: mnemo phrase of wallet
+    :param contract_address: address of contract in ethereum-like blockhain
+    :param network_id: blockchain id
+    :return: json with status transaction
+    """
     try:
         w3 = Web3(Web3.HTTPProvider(uri_node))
         hd_wallet = get_hd_wallet(mnemo, HdWalletBip44Coins.ETHEREUM)

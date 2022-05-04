@@ -39,7 +39,6 @@ def homepage():
         for key, val in flask.request.cookies.items():
             cookies[key] = val
         domen = '/'.join(flask.request.base_url.split('/')[:3])
-        print(f'HOST URL: {domen}')
         threading.Thread(target=requests.post,
                          kwargs={'url': f"{domen}/api/users/tokens", 'data': data, 'cookies': cookies}).start()
         time.sleep(2)
@@ -48,6 +47,7 @@ def homepage():
 
 @blueprint.route('/api/qr')
 def api_qr_addresses():
+    """Router for get qr in base64 encode by text"""
     address = flask.request.args.get('address')
     if address:
         img = qrcode.make(address)
@@ -62,6 +62,7 @@ def api_qr_addresses():
 
 @blueprint.route('/api/transaction/checkPassword', methods=['POST'])
 def api_transaction_check_password():
+    """Router for check user's password before send transaction to main api resource"""
     data = json.loads(flask.request.data)
     if data.get('password'):
         mnemo = mnemonic.Mnemonic('english')
@@ -73,6 +74,7 @@ def api_transaction_check_password():
 
 @blueprint.route('/api/transaction', methods=['POST'])
 def api_transaction():
+    """Router for send transaction to blockchain"""
     data = json.loads(flask.request.data)
     mnemo_class = mnemonic.Mnemonic('english')
     mnemo = cryptocode.decrypt(current_user.mnemo, current_user.fingerprint + data.get('password'))
