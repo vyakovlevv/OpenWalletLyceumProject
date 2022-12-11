@@ -1,6 +1,3 @@
 import os
 
 SECRET_KEY = 'cliearuvnuiovnwbhyjtrkpvwoipnu43veoritu587#O%&*obtirusnj489a3h#O(R*H#biruostno9385YOBRTINUPOSWIOPU'
-#0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c
-#0x894424A5FF388C28EccE85d82735DaDA700828D4
-#0xe9e7cea3dedca5984780bafc599bd69add087d56
