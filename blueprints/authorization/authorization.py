@@ -80,14 +80,14 @@ def registration_page():
             try:
                 session: sqlalchemy.orm.Session
                 data = json.loads(flask.request.data)
-                control_keys_verdict = utils.control_required_keys(data, ['fp', 'mnemo', 'password'])
+                control_keys_verdict = utils.control_required_keys(data, ['mnemo', 'password']) # FIXME ['fp', 'mnemo', 'password']
                 if control_keys_verdict == 'ok':
-                    encode_mnemo = cryptocode.encrypt(data['mnemo'], data['fp'] + data['password'])
+                    encode_mnemo = cryptocode.encrypt(data['mnemo'], data['password'])  # FIXME data['fp'] + data['password']
                     mnemo = mnemonic.Mnemonic('english')
                     if mnemo.check(data['mnemo']):
                         secured_code = utils.generate_secure_code()
                         user = users.User(
-                            fingerprint=data['fp'],
+                            fingerprint="testfp", # fingerprint=data['fp'],
                             mnemo=encode_mnemo,
                             secured_code=secured_code
                         )

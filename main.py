@@ -4,7 +4,6 @@ from db_utils import db_session
 from blueprints.authorization import authorization
 from blueprints.home import home
 from flask import Flask, request, redirect, make_response
-import bfa
 from blueprints.home import home_api
 from db_models.users import User
 import logging
@@ -37,10 +36,10 @@ def index_map():
         return redirect('/registration/')
 
 
-@app.context_processor
-def bfa_flask():
-    """Function for load hidden form with fingerprint in <header> in DOM content of page"""
-    return bfa.templatetags.bfa.fingerprint_input()
+# @app.context_processor
+# def bfa_flask():
+#     """Function for load hidden form with fingerprint in <header> in DOM content of page"""
+#     return bfa.templatetags.bfa.fingerprint_input()
 
 
 @login_manager.user_loader
