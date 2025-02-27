@@ -11,7 +11,7 @@
    
 3. Запустите приложение
 	```bash
-	docker run -p 8080:8080 ${{ secrets.DOCKER_HUB_USERNAME }}/openwalletlyceumproject:latest
+	docker run -p 8080:8080 vladimiryy/openwalletlyceumproject:latest
 	```
 	Приложение будет запущено на 8080 порту.
 	
