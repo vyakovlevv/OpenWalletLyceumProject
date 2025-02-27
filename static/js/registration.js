@@ -22,7 +22,8 @@ document.querySelector('.refresh-mnemo-button').addEventListener('click', functi
 
 document.querySelector('#registration-form').addEventListener('submit', function (e) {
     e.preventDefault()
-    const fp = document.querySelector('#fingerprint').querySelector('input').value
+    // const fp = document.querySelector('#fingerprint').querySelector('input').value
+    const fp = "testfp"; // fixme
     const mnemo = document.querySelector('.mnemo-phrase').value
     const password = document.querySelector('#password').value
     const password_again = document.querySelector('#password-again').value

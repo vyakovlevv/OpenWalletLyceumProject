@@ -19,7 +19,8 @@ function show_errors(errors) {
 document.querySelector('#login-form').addEventListener('submit', function (e) {
     e.preventDefault()
     const url = '/login/'
-    const fp = document.querySelector('#fingerprint').querySelector('input').value
+    // const fp = document.querySelector('#fingerprint').querySelector('input').value
+    const fp = "testfp"; // FIXME
     const password = document.querySelector('#password').value
     fetch(url, {
         'method': 'POST',

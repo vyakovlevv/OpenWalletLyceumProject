@@ -87,7 +87,7 @@ def registration_page():
                     if mnemo.check(data['mnemo']):
                         secured_code = utils.generate_secure_code()
                         user = users.User(
-                            fingerprint="testfp", # fingerprint=data['fp'],
+                            fingerprint="testfp", # fingerprint=data['fp'], fixme
                             mnemo=encode_mnemo,
                             secured_code=secured_code
                         )

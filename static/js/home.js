@@ -138,7 +138,8 @@ function load_tokens() {
     const data_request = {
         offset: 15,
         indexStart: 0,
-        fp: document.querySelector('#fingerprint').querySelector('input').value,
+        // fp: document.querySelector('#fingerprint').querySelector('input').value,
+        fp: "testfp", // FIXME
         secured_code: getCookie('secured_code')
     }
     const content_home = document.querySelector('.content-token-home')
